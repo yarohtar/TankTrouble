@@ -20,8 +20,8 @@ namespace Tenkici
         private void Form1_Load(object sender, EventArgs e)
         {
             GameObject a;
-            a = new Tenkic();
-            a.Draw();
+            //a = new Tenkic();
+            //a.Draw();
         }
     }
 }

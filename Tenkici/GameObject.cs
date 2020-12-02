@@ -11,7 +11,7 @@ namespace Tenkici
     {
         public abstract Collider GetCollider { get; }
         public abstract string GetName { get; }
-        public abstract void Update();
+        public abstract void Update(float deltaT);
         public abstract void Draw(Graphics g);
     }
 }

@@ -25,10 +25,5 @@ namespace Tenkici
             this.O = O;
             this.rotation = rotation;
         }
-
-        public override PointF[] Collision(Collider c)
-        {
-            return new PointF[1];
-        }
     }
 }
