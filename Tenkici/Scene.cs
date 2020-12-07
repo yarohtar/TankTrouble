@@ -14,7 +14,7 @@ namespace Tenkici
         private static List<GameObject> gameObjects;
         private static Stopwatch time;
         private static long t;
-
+        private static Random random;
 
         public static void Init()
         {

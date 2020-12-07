@@ -9,14 +9,30 @@ namespace Tenkici
 {
     public abstract class Collider
     {
-        private PointF[] temena;
-        public abstract void Update(PointF O, float rotation);
-        public PointF[] Collision(Collider A)
+        public PointF[] temena;
+
+        public abstract PointF[] Collides(Duz a);
+
+        public virtual void Update(PointF O, float rotation)
         {
-            List<PointF> preseci=new List<PointF>();
-            PointF K;
-            for(int i=0; i<temena.Length-1; i++)
+            return;
+        }
+
+        public virtual PointF[] Collision(Collider A)
+        {
+            List<PointF> preseci = new List<PointF>();
+            PointF[] K;
+            for (int i = 0; i < temena.Length - 1; i++)
             {
+                K = A.Collides(new Duz(temena[i], temena[i + 1]));
+                if (K != null)
+                {
+                    foreach (PointF k in K)
+                    {
+                        preseci.Add(k);
+                    }
+                }
+                /*
                 for (int j = 0; j < A.temena.Length - 1;) 
                 {
                     K = new Duz(temena[i], temena[i + 1]).Preseca(new Duz(A.temena[j], A.temena[j + 1]));
@@ -25,8 +41,17 @@ namespace Tenkici
                 }
                 K=new Duz(temena[i], temena[i + 1]).Preseca(new Duz(A.temena[A.temena.Length-1], A.temena[0]));
                 if (K != null)
-                    preseci.Add(K);
+                    preseci.Add(K);*/
             }
+            K = A.Collides(new Duz(temena[temena.Length - 1], temena[0]));
+            if (K != null)
+            {
+                foreach (PointF k in K)
+                {
+                    preseci.Add(k);
+                }
+            }
+            /*
             for (int j = 0; j < A.temena.Length - 1;)
             {
                 K = new Duz(temena[temena.Length-1], temena[0]).Preseca(new Duz(A.temena[j], A.temena[j + 1]));
@@ -35,7 +60,7 @@ namespace Tenkici
             }
             K = new Duz(temena[temena.Length-1], temena[0]).Preseca(new Duz(A.temena[A.temena.Length - 1], A.temena[0]));
             if (K != null)
-                preseci.Add(K);
+                preseci.Add(K);*/
             return preseci.ToArray();
         }
     }

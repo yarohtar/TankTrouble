@@ -7,19 +7,23 @@ using System.Drawing;
 
 namespace Tenkici
 {
-    class Duz
+    public class Duz : Collider
     {
-        PointF A, B;
-
         public Duz(PointF a, PointF b)
         {
-            A = a;
-            B = b;
+            temena = new PointF[2];
+            temena[0] = a;
+            temena[1] = b;
         }
 
-        public PointF Preseca(Duz b)//vraca null ako se ne seku
+        public override PointF[] Collides(Duz b)//vraca null ako se ne seku, takodje potreban mi je niz iako je max 1 tacka presek
         {
-            return new PointF();
+            throw new NotImplementedException();
+        }
+
+        public override PointF[] Collision(Collider A)
+        {
+            return A.Collides(this);
         }
     }
 }

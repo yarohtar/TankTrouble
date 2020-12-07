@@ -11,9 +11,9 @@ namespace Tenkici
 {
     class Metak : GameObject
     {
-        private const int R=4;
+        private const float R=4;
         private const float VELOCITY = 200;
-        private const float BULLET_LIFETIME = 1000;
+        private const long BULLET_LIFETIME = 1000;
 
         private PointF position;
         private float rotation;
@@ -30,6 +30,10 @@ namespace Tenkici
             t.Start();
 
             dispose = false;
+
+            float d = R * (float)Math.Cos(Math.PI / 4);
+
+            c = new SquareCollider(position, (float)Math.PI / 2, d, d, d, d);
         }
 
         public override Collider GetCollider => c;
