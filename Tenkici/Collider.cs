@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Tenkici
 {
-    abstract class Collider
+    public abstract class Collider
     {
         private PointF[] temena;
         public abstract void Update(PointF O, float rotation);
