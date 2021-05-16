@@ -18,6 +18,12 @@ namespace Tenkici
             return;
         }
 
+        public virtual void Draw(Graphics g)
+        {
+            Pen p = new Pen(Color.Green, 1);
+            g.DrawPolygon(p, temena);
+        }
+
         public virtual PointF[] Collision(Collider A)
         {
             List<PointF> preseci = new List<PointF>();
@@ -61,7 +67,9 @@ namespace Tenkici
             K = new Duz(temena[temena.Length-1], temena[0]).Preseca(new Duz(A.temena[A.temena.Length - 1], A.temena[0]));
             if (K != null)
                 preseci.Add(K);*/
-            return preseci.ToArray();
+            if(preseci.Count>0)
+                return preseci.ToArray();
+            return null;
         }
     }
 }

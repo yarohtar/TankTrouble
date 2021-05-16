@@ -26,6 +26,11 @@ namespace Tenkici
         public override bool IsDisposed => disposed;
         public override bool IsMoveable => false;
 
+        public override void Destroy()
+        {
+            disposed = true;
+        }
+
         public override void Draw(Graphics g)
         {
             foreach (Wall w in walls)

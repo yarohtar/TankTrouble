@@ -16,6 +16,7 @@ namespace Tenkici
         public abstract bool IsMoveable { get; }
 
         public abstract void Draw(Graphics g);
+        public abstract void Destroy();
 
         public virtual void Update(float deltaT)
         {

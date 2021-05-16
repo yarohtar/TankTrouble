@@ -23,7 +23,8 @@ namespace Tenkici
             time = new Stopwatch();
             time.Start();
 
-            NewGameObject(new Tenkic(Color.Red, new PointF(50, 50), 0f, "player"));
+            NewGameObject(new Tenkic(Color.Red, new PointF(50, 50), 0f, "player", ControlSet.Arrows));
+            NewGameObject(new Tenkic(Color.Blue, new PointF(100, 100), 0f, "player1", ControlSet.ESDF));
         }
         public static void NewGameObject(GameObject a)
         {
@@ -56,6 +57,29 @@ namespace Tenkici
         {
             for (int i = 0; i < gameObjects.Count; i++)
                 gameObjects[i].Draw(g);
+        }
+
+        public static (GameObject[] collidedGameObjects, PointF[][] collisionPoints) DetectCollision(GameObject gameObject)
+        {
+            //return (null,null);
+            Collider c = gameObject.GetCollider;
+            var collidedGameObjects=new List<GameObject>();
+            var collisionPoints = new List<PointF[]>();
+
+            foreach(GameObject gO in gameObjects)
+            {
+                PointF[] colls;
+                if(gO!=gameObject)
+                {
+                    colls = c.Collision(gO.GetCollider);
+                    if(colls != null)
+                    {
+                        collidedGameObjects.Add(gO);
+                        collisionPoints.Add(colls);
+                    }
+                }
+            }
+            return (collidedGameObjects.ToArray(), collisionPoints.ToArray());
         }
     }
 }

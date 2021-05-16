@@ -21,7 +21,7 @@ namespace Tenkici
         |                       |
      b2 |                       | b2
         |                       |
-        2-------------|---------3
+        3-------------|---------2
             a1            a2
 
          */
@@ -42,8 +42,8 @@ namespace Tenkici
 
             temena[0] = Rotate(-a1, -b1, rotation);
             temena[1] = Rotate(a2, -b1, rotation);
-            temena[2] = Rotate(-a1, b2, rotation);
-            temena[3] = Rotate(a2, b2, rotation);
+            temena[3] = Rotate(-a1, b2, rotation);
+            temena[2] = Rotate(a2, b2, rotation);
 
             for(int i=0; i<4; i++)
             {
@@ -61,8 +61,8 @@ namespace Tenkici
         {
             temena[0] = Rotate(-a1, -b1, rotation);
             temena[1] = Rotate(a2, -b1, rotation);
-            temena[2] = Rotate(-a1, b2, rotation);
-            temena[3] = Rotate(a2, b2, rotation);
+            temena[3] = Rotate(-a1, b2, rotation);
+            temena[2] = Rotate(a2, b2, rotation);
 
             for (int i = 0; i < 4; i++)
             {
@@ -74,7 +74,7 @@ namespace Tenkici
         {
             List<PointF> preseci = new List<PointF>();
             PointF[] K;
-            for(int i=0; i<4; i++)
+            for(int i=0; i<3; i++)
             {
                 K = new Duz(temena[i], temena[i + 1]).Collides(A);
                 if (K != null)
@@ -87,5 +87,6 @@ namespace Tenkici
 
             return preseci.ToArray();
         }
+
     }
 }

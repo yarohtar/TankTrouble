@@ -16,9 +16,10 @@ namespace Tenkici
         private const int FORWARD_VELOCITY = 100;
         private const int BACKWARD_VELOCITY = -50;
         private const int ANGULAR_VELOCITY = 3;
-        private const float BULLET_OFFSET = 10;
+        private const float BULLET_OFFSET = 15;
         private const long BULLET_LIFETIME = 5000;
         private const long TIME_BETWEEN_SHOTS = 150;
+        private const float D1 = 10, D2 = 10, D3 = 10, D4 = 10;
 
         private Color color;
         private PointF position;
@@ -57,13 +58,45 @@ namespace Tenkici
                 bullets[i] = new Stopwatch();
             lastShot = new Stopwatch();
             lastShot.Start();
-            //collider = new SquareCollider();
+            collider = new SquareCollider(position, rotation, D1,D2,D3,D4);
+        }
+
+        public Tenkic(Color color, PointF position, float rotation, string name, ControlSet controls)
+        {
+            this.color = color;
+            this.position = position;
+            this.rotation = rotation;
+            this.name = name;
+
+            velocity = 0;
+            angvelocity = 0;
+
+            moving = new Dictionary<string, Key>();
+            moving.Add("forward", controls.Up);
+            moving.Add("backward", controls.Down);
+            moving.Add("turnleft", controls.Left);
+            moving.Add("turnright", controls.Right);
+
+            actions = new Dictionary<string, Keys>();
+            actions.Add("shoot", controls.Shoot);
+
+            bullets = new Stopwatch[MAX_AMMO];
+            for (int i = 0; i < MAX_AMMO; i++)
+                bullets[i] = new Stopwatch();
+            lastShot = new Stopwatch();
+            lastShot.Start();
+            collider = new SquareCollider(position, rotation, D1, D2, D3, D4);
         }
 
         public override Collider GetCollider => collider;
         public override string GetName => name;
         public override bool IsDisposed => dispose;
         public override bool IsMoveable => true;
+
+        public override void Destroy()
+        {
+            dispose = true;
+        }
 
         public override void Command(Keys key)
         {
@@ -156,8 +189,8 @@ namespace Tenkici
         public override void Draw(Graphics g)
         {
             Pen b = new Pen(color, 2);
-            g.DrawEllipse(b, position.X - 5, position.Y - 5, 10, 10);
-            g.DrawLine(b, position, new PointF(position.X + 15 * (float)Math.Cos(rotation), position.Y - 15 * (float)Math.Sin(rotation)));
+            g.DrawEllipse(b, position.X - D1, position.Y - D2, D1+D3, D2+D4);
+            g.DrawLine(b, position, new PointF(position.X + 20 * (float)Math.Cos(rotation), position.Y - 15 * (float)Math.Sin(rotation)));
         }
     }
 }
